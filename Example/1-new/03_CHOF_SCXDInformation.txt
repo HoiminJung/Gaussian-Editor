@@ -1,0 +1,26 @@
+Sample Name : 03_CHOF,   14   160.09   4 
+
+Formula : C H O F
+
+Crystal Color : pale brown
+
+SIZE 0.072 0.075 0.109
+
+TEMP -100.15
+
+Crystal Shape : rod
+
+Wavelength (Å) : 0.610000
+
+Exposure Time : 0.60
+
+Delta Omega : 3.00
+
+Phi Set Value : 0.0
+
+Storage Ring (㎃) : 250.76
+
+Ring Status: Top-Up
+
+Standard 16bit 5760 x 5760
+

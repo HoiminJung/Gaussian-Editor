@@ -106,7 +106,6 @@ public class GaussianEditorMain extends javax.swing.JFrame implements DropTarget
         jPanel10 = new javax.swing.JPanel();
         LabelTargetFile4 = new javax.swing.JLabel();
         txtAdditionalKeys = new javax.swing.JTextField();
-        chkFixAdditionalKeys = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Text changer");
@@ -602,13 +601,6 @@ public class GaussianEditorMain extends javax.swing.JFrame implements DropTarget
             }
         });
 
-        chkFixAdditionalKeys.setText("fix");
-        chkFixAdditionalKeys.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                chkFixAdditionalKeysMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -618,8 +610,6 @@ public class GaussianEditorMain extends javax.swing.JFrame implements DropTarget
                 .addComponent(LabelTargetFile4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAdditionalKeys)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(chkFixAdditionalKeys, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -627,9 +617,8 @@ public class GaussianEditorMain extends javax.swing.JFrame implements DropTarget
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelTargetFile4)
-                    .addComponent(txtAdditionalKeys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkFixAdditionalKeys))
-                .addGap(0, 14, Short.MAX_VALUE))
+                    .addComponent(txtAdditionalKeys, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -844,12 +833,9 @@ public class GaussianEditorMain extends javax.swing.JFrame implements DropTarget
         refresh_input();
     }//GEN-LAST:event_txtMemoryKeyPressed
 
-    private void chkFixAdditionalKeysMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkFixAdditionalKeysMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chkFixAdditionalKeysMouseClicked
-
     private void txtAdditionalKeysKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdditionalKeysKeyPressed
         // TODO add your handling code here:
+        refresh_input();        
     }//GEN-LAST:event_txtAdditionalKeysKeyPressed
 
     /**
@@ -917,7 +903,6 @@ public class GaussianEditorMain extends javax.swing.JFrame implements DropTarget
     private static javax.swing.JCheckBox chkCopycheckpoint;
     private static javax.swing.JCheckBox chkCurrentFolder;
     private static javax.swing.JCheckBox chkDispersion;
-    private javax.swing.JCheckBox chkFixAdditionalKeys;
     private static javax.swing.JCheckBox chkFixBasis;
     private static javax.swing.JCheckBox chkUnrestricted;
     private static javax.swing.JComboBox<String> comboboxCalcType;
@@ -933,7 +918,7 @@ public class GaussianEditorMain extends javax.swing.JFrame implements DropTarget
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JLabel lblInstruction;
-    private javax.swing.JTextField txtAdditionalKeys;
+    private static javax.swing.JTextField txtAdditionalKeys;
     private static javax.swing.JTextArea txtAreaInputPreview;
     private static javax.swing.JTextField txtBasisMain;
     private static javax.swing.JTextField txtBasisSub;
@@ -1135,9 +1120,17 @@ public class GaussianEditorMain extends javax.swing.JFrame implements DropTarget
         txtAreaInputPreview.append("nosym\n");
         txtAreaInputPreview.append("int=ultrafine\n");
 
+        //Additional input keywords
+        String additional_keys = txtAdditionalKeys.getText();
+        if (!additional_keys.equals("")) {
+            for (int i = 0; i < additional_keys.split("\\s+").length; i++) {
+                txtAreaInputPreview.append(additional_keys.split("\\s+")[i] + "\n");
+            }
+        }
+
         //Title Charge multip
-        txtAreaInputPreview.append("\n"+txtTitle.getText()+"\n\n");
-        txtAreaInputPreview.append(txtCharge.getText()+" "+txtMultiplicity.getText()+'\n');
+        txtAreaInputPreview.append("\n" + txtTitle.getText() + "\n\n");
+        txtAreaInputPreview.append(txtCharge.getText() + " " + txtMultiplicity.getText() + '\n');
 
         //print xyz coordinate
         if (!txtXYZFilePath.getText().equals("")) {
